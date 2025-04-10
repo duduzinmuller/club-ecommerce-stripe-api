@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://eccomerce-frontend-ten.vercel.app",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
