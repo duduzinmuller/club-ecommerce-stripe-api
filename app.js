@@ -4,12 +4,23 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
 const corsOptions = {
-  origin: "https://eccomerce-frontend-ten.vercel.app",
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONT_END_URL,
+      process.env.FRONT_END_DEVELOPMENT,
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
+
 app.use(cors(corsOptions));
 
 app.use(express.json());
